@@ -1,0 +1,34 @@
+.login-page{
+    .form-login{
+        width: 100%;
+        >*{
+            width: 30%;
+        }
+        .el-input{
+            margin-bottom: rem(5px);
+        }
+      
+    }
+    .msg{
+        color: salmon;
+    }
+    .green{
+        color: rgb(111, 179, 111);
+        &.sign-up-click{
+            cursor: pointer;
+        }
+    }
+}
+.add-reviews{
+    width: 70%;
+    margin: 0 auto;
+    .form-review{
+        width: 100%;
+    
+        >*{
+        width: 70%;
+    
+            margin-bottom: rem(20px);
+        }
+    }
+}

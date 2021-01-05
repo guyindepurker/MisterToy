@@ -2,15 +2,22 @@ import { toyService } from '../services/toy.service.js';
 export const toyStore = {
   state: {
     toys: [],
-    page: 1,
     filterBy: null,
+    toy:null
   },
   getters: {
     toysForDisplay(state) {
       return state.toys;
     },
+    toyForDisplay(state){
+      return state.toy
+    }
   },
   mutations: {
+    setToy(state,{toy}){
+      state.toy = toy
+      console.log('state.toy:', state.toy)
+    },
     setToys(state, { toys }) {
       state.toys = toys;
     },
@@ -30,39 +37,53 @@ export const toyStore = {
       if (state.page === 0 || !state.toys.length) state.page = 1;
     },
     setFilter(state, { filterBy }) {
+      console.log('state.filterBy:', state.filterBy)
       state.filterBy = filterBy;
     },
   },
   actions: {
-    loadToys({ commit, state }) {
+    async loadToy({commit},{toyId}){
       commit({ type: 'setIsLoading', isLoading: true });
-      toyService.query(state.page, state.filterBy).then((toys) => {
-        console.log('toys load:', toys);
+      const toy = await toyService.getById(toyId)
+      commit({type:'setToy',toy})
+      setTimeout(()=>{
         commit({ type: 'setIsLoading', isLoading: false });
-        commit({ type: 'setToys', toys });
-      });
+      },2000)
     },
-    saveToy({ commit }, { toy }) {
+    async loadToys({ commit, state }) {
+      commit({ type: 'setIsLoading', isLoading: true });
+     const toys = await toyService.query(state.filterBy)
+        console.log('toys load:', toys);
+        commit({ type: 'setToys', toys });
+        setTimeout(()=>{
+          commit({ type: 'setIsLoading', isLoading: false });
+        },2000)
+     
+    },
+   async saveToy({ commit }, { toy }) {
       commit({ type: 'setIsLoading', isLoading: true });
       const typeAction = toy._id ? 'updateToy' : 'saveToy';
-      toyService.save(toy).then((toy) => {
-        commit({ type: 'setIsLoading', isLoading: false });
+     await toyService.save(toy)
         commit({ type: typeAction, toy });
-      });
+        setTimeout(()=>{
+          commit({ type: 'setIsLoading', isLoading: false });
+        },2000)
+      
     },
-    removeToy({ commit }, { id }) {
-      console.log('id:', id);
-      toyService.remove(id).then(() => {
-        commit({ type: 'removeToy', id });
-      });
+    async removeToy({ commit }, { id }) {
+         await toyService.remove(id)
+         commit({ type: 'removeToy', id });
+     
     },
-    changePage({ commit, state }, { diff }) {
+   async changePage({ commit, state }, { diff }) {
       commit({ type: 'setIsLoading', isLoading: true });
       commit({ type: 'changePage', diff });
-      toyService.query(state.page).then((toys) => {
-        commit({ type: 'setIsLoading', isLoading: false });
+      const toys = await toyService.query(state.page)
         commit({ type: 'setToys', toys });
-      });
+        setTimeout(()=>{
+          commit({ type: 'setIsLoading', isLoading: false });
+        },2000)
+      
     },
   },
 };

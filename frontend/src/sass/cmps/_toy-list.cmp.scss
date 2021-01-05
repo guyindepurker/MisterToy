@@ -1,0 +1,14 @@
+.toy-list li{
+    border: 1px solid lightgrey;
+    background-color: #bdd3e129;
+    padding: rem(10px);
+    margin: rem(10px);
+    border-radius: rem(10px);
+    min-width:  rem(280px) ;
+    text-align: center;
+    .name-preivew{
+        font-size: rem(25px);
+        text-transform: capitalize;
+    }
+
+}

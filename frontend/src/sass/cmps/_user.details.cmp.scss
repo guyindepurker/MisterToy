@@ -1,0 +1,9 @@
+.user-profile{
+    background-color: #ededed;
+    width: 50%;
+    margin: 10px auto;
+    box-shadow: 0 0 2px black;
+    >*{
+        margin-bottom: rem(5px);
+    }
+}

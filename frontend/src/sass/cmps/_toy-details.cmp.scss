@@ -1,0 +1,24 @@
+.toy-details{
+    .toy-details-container{
+        margin-top: rem(25px);
+        margin-bottom: rem(20px);
+        strong{
+            margin-right:5px ;
+        }
+        h2{
+            font-weight: normal;
+    
+        }
+        &.flex{
+            flex-direction: row-reverse;
+        }
+        .img-item{
+            margin: rem(20px);
+            width: 150px;
+        height: 150px;
+        display: block;
+        }
+    }
+    padding-bottom: rem(20px);
+
+}

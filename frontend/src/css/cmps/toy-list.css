@@ -1,9 +1,0 @@
-.toy-list li{
-    border: 1px solid lightgrey;
-    background-color: rgb(185, 210, 225);
-    padding: 10px;
-    margin: 10px;
-    border-radius: 10px;
-    min-width: 280px ;
-    text-align: center;
-}

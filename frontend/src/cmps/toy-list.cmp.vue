@@ -6,8 +6,8 @@
       </li>
     </ul>
     <div class="contorls-paging flex row space-around">
-      <button @click="pagging(-1)">Prev</button>
-      <button @click="pagging(1)">Next</button>
+        <el-button type="primary" @click="pagging(-1)" icon="el-icon-arrow-left">Previous Page</el-button>
+  <el-button @click="pagging(1)" type="primary">Next Page<i class="el-icon-arrow-right el-icon-right"></i></el-button>
     </div>
   </section>
 </template>

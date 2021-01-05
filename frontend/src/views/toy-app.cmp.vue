@@ -1,7 +1,7 @@
 <template>
   <section class="toy-app">
     <toy-filter @filtered="setFilter"></toy-filter>
-    <toy-list
+    <toy-list class="container-toy"
       v-if="!isLoading"
       :toys="toys"
       @setPage="changeCurrPage"
@@ -11,6 +11,7 @@
       v-else
       src="https://i.pinimg.com/originals/78/e8/26/78e826ca1b9351214dfdd5e47f7e2024.gif"
     />
+    
   </section>
 </template>
 
@@ -25,6 +26,10 @@ export default {
     toys() {
       return JSON.parse(JSON.stringify(this.$store.getters.toysForDisplay));
     },
+    user(){
+      return this.$store.getters.loggedinUser
+    }
+ 
   },
   methods: {
     changeCurrPage(diff) {
@@ -41,12 +46,10 @@ export default {
       });
     },
   },
-
-  created() {
+    created() {
     this.$store.dispatch({
       type: "loadToys",
-    });
-  },
+    })},
   components: {
     toyList,
     toyFilter,

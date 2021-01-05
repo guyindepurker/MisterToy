@@ -1,0 +1,22 @@
+.reviews-list{
+    .review-list{
+        max-height: 500px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        li{
+            background-color: #f8f8f8;
+            margin: rem(5px);
+            border: 1px solid lightcyan;
+            border-radius: 5px;
+            padding: rem(15px);
+            .by-user{
+                color: rgb(46, 46, 46);
+            }
+            .review-txt{
+                font-size: rem(22px);
+                letter-spacing: 1px;
+                font-weight: bold;
+            }
+        }
+    }
+}

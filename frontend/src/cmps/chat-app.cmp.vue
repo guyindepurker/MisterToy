@@ -1,17 +1,15 @@
 <template>
-  <section class="chat-app">
-      <popup>
-          <h1 slot="header">Conteact With Us!</h1>
+  <section class="chat-app flex column space-between">
           <div class="container-massages">
               <div class="msg-txt-container" v-for="msg in massages" :key="msg._id">
-                  <h2><span class="title-talking">{{msg.name}}</span> : {{msg.txt}}</h2>
+                  <h2><span class="title-user">{{msg.name}}</span> : {{msg.txt}}</h2>
               </div>
           </div>
-              <form slot="footer" @submit.prevent="sendMsg" class="">
-              <input type="text" v-model.trim="userMsg" placeholder="ask something...">
-              <button>Send</button>
+              <form  @submit.prevent="sendMsg" class="flex ">
+        <el-input  v-model.trim="userMsg" placeholder="ask something..."></el-input>
+                <el-button class="mr-5" @click="sendMsg">Send</el-button>
               </form>
-      </popup>
+
   </section>
 </template>
 <script>
@@ -28,13 +26,13 @@ export default {
         sendMsg(){
             const msg = JSON.parse(JSON.stringify(this.userMsg))
             if(!msg) return;
-            const userMsg = {_id:utilService.makeId(),name:'user',txt:msg}
+            const userMsg = {_id:utilService.makeId(),name:'User',txt:msg}
             this.massages.push(userMsg)
             this.userMsg = ''
             this.answer()
         },
         answer(){
-            const msg = {_id:utilService.makeId(),name:'Store',txt:'Sorry , we need didnt have bot yet...'}
+            const msg = {_id:utilService.makeId(),name:'Store',txt:'Sorry , this chat is in progress...'}
              setTimeout(()=>{
             this.massages.push(msg)
             },1000)

@@ -1,6 +1,4 @@
-const url = 'http://localhost:3000/toy';
-
-import axios from 'axios';
+import HttpService from './HttpService'
 
 export const toyService = {
   getById,
@@ -11,46 +9,41 @@ export const toyService = {
 
 };
 
-function query(page=1,filterBy=null) {
+async function query(filterBy = null) {
   var searchTerm = ''
   if(filterBy){
-    const inStock = filterBy['inStock'] ? `&inStock=${filterBy['inStock']}` : ''
-    const sort = filterBy['sort'] ? `&_sort=${filterBy['name']}` : ''
-    const type = filterBy['type'] ? `&type=${filterBy['type']}` : ''
-    const q = filterBy['q'] ? `&q=${filterBy['q']}` : ''
-    searchTerm = `${q}${sort}${inStock}${type}` 
+    const inStock = (filterBy.inStock==='all') ? '' : `&inStock=${filterBy.inStock}` 
+    const sort = (filterBy.sort==='all') ? '':`&sort=${filterBy.sort}` 
+    const type = (filterBy.type ==='all') ? '' : `&type=${filterBy.type}`
+    const q = filterBy.q ? `&q=${filterBy.q}` : ''
+    searchTerm = `${q}${sort}${inStock}${type}`
   }
-  return axios.get(`${url}?_page=${page}&_limit=8${searchTerm}`)
-    .then(res=>res.data)
+
+  return HttpService.get(`toy?${searchTerm}`)
 }
 
 function getById(id) {
-  return axios.get(`${url}/${id}`)
-    .then(res=>res.data)
+  return HttpService.get(`toy/${id}`)
 }
 function remove(id) {
-  return axios.delete(`${url}/${id}`)
-    .then(res=>res.data)
+  return HttpService.delete(`toy/${id}`)
 }
 
 function save(toy) {
   if(toy._id){
     toy.updateAt = Date.now()
-    return axios.put(`${url}/${toy._id}` ,toy)
-      .then(res=>res.data)
+    return HttpService.put(`toy/${toy._id}` ,toy)
   }else {
-    toy.cratedAt = Date.now()
-    return axios.post(url,toy).then(res=>res.data)
+    toy.createdAt = Date.now()
+    return HttpService.post('toy',toy)
   }
 }
 
 function getEmptyToy() {
   return {
-    _id: '',
     name: '',
     price: '',
     inStock: true,
-    createdAt: '',
     type:''
   };
 }

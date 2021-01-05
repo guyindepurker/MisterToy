@@ -1,0 +1,26 @@
+.header-app-container{
+    position: relative;
+    background-color: rgb(238, 238, 238);
+    padding: 10px;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+}
+nav {
+        padding: 30px;
+    .router-link-active{
+        color: rgb(145, 196, 208);
+    }
+    a {
+        font-weight: bold;
+        color: #2c3e50;
+    }
+    .router-link-exact-active {
+        color: #5f7985;
+    }
+    .logo{
+        font-weight: 500;
+        margin-right: 168px;
+font-size: 25px;
+}
+    
+}

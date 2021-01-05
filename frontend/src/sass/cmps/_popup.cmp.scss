@@ -1,0 +1,16 @@
+.popup-cotainer{
+    width: fit-content;
+    height: 400px;
+    position: fixed;
+    bottom: 65px;
+    right: 13px;
+    box-shadow: 0 0px 3px rgb(174, 174, 174);
+    background-color: #f1f1f1;
+    font-size: 1.5rem;
+    padding: 10px;
+    border: 1px solid black;
+    .header-popup{
+        background-color: rgb(52, 52, 52);
+        color:whitesmoke;
+    }
+}
